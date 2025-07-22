@@ -858,7 +858,7 @@ class SophosFirewall:
         return User(self.client).create(debug, **kwargs)
 
     def create_vlan(
-        self, interface: str, zone: str, vlan_id: int, name: str, ipv4_assignment: str, vlan_params, debug: bool = False
+        self, interface: str, zone: str, vlan_id: int, name: str, is_ipv4: bool, vlan_params, debug: bool = False
     ):
         """Create a VLAN.
         Args:
@@ -895,7 +895,7 @@ class SophosFirewall:
             zone=zone,
             vlan_id=vlan_id,
             name=name,
-            ipv4_assignment=ipv4_assignment,
+            is_ipv4=is_ipv4,
             vlan_params=vlan_params,
             debug=debug
         )

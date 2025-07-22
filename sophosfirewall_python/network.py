@@ -47,14 +47,14 @@ class Vlan:
             )
         return self.client.get_tag(xml_tag="VLAN")
 
-    def create(self, interface: str, zone: str, vlan_id: int, name: str, ipv4_assignment: str, vlan_params, debug: bool = False):
+    def create(self, interface: str, zone: str, vlan_id: int, name: str, is_ipv4: bool, vlan_params, debug: bool = False):
         """Create a VLAN.
         Args:
             interface (str): Interface name
             zone (str): Zone name
             vlan_id (int): VLAN ID
             name (str): VLAN name
-            ipv4_assignment (str): IPv4 assignment (Static, PPPoe, DHCP)
+            is_ipv4 (bool): Is IPv4
             vlan_params (dict): Configuration parameters for the vlan, see Keyword Args for supported parameters.
 
         Keyword Args:
