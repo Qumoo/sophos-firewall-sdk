@@ -1,0 +1,35 @@
+<Request>
+   <Login>
+        <Username>{{username}}</Username>
+        <Password >{{password}}</Password>
+    </Login>
+    <Set operation="add">
+        <VLAN>
+            <Zone>{{ zone }}</Zone>
+            <Interface>{{ interface }}</Interface>
+            <Hardware>{{ interface }}.{{ vlan_id }}</Hardware>
+            <Name>{{ name }}</Name>
+            <VLANID>{{ vlan_id }}</VLANID>
+            <LocalIP />
+            {% if is_ipv4 %}
+            <IPv4Configuration>Enable</IPv4Configuration>
+            <IPv4Assignment>{{ ipv4_assignment }}</IPv4Assignment>
+            <IPAddress>{{ ip_address }}</IPAddress>
+            <Netmask>{{ netmask }}</Netmask>
+            {% else %}
+            <IPv4Configuration>Disable</IPv4Configuration>
+            {% endif %}
+            {% if is_ipv6 %}
+            <IPv6Configuration>Enable</IPv6Configuration>
+                <!-- TODO: IPv6 -->
+            {% else %}
+            <IPv6Configuration>Disable</IPv6Configuration>
+            <IPv6Prefix/>
+			<IPv6GatewayName/>
+			<IPv6GatewayAddress/>
+            <IPv6Assignment/>
+            {% endif %}
+                <!-- TODO: WAN, PPoE, DHCP Configuration -->
+        </VLAN>
+    </Set>
+</Request>

@@ -47,6 +47,48 @@ class Vlan:
             )
         return self.client.get_tag(xml_tag="VLAN")
 
+    def create(self, interface: str, zone: str, vlan_id: int, name: str, ipv4_assignment: str, vlan_params, debug: bool = False):
+        """Create a VLAN.
+        Args:
+            interface (str): Interface name
+            zone (str): Zone name
+            vlan_id (int): VLAN ID
+            name (str): VLAN name
+            ipv4_assignment (str): IPv4 assignment (Static, PPPoe, DHCP)
+            vlan_params (dict): Configuration parameters for the vlan, see Keyword Args for supported parameters.
+
+        Keyword Args:
+            interface (str): Name of the parent interface
+            zone (str): Name of the zone to assign to the sub-interface
+            vlan_id (int): VLAN ID
+            name (str): VLAN name
+            is_ipv4 (bool): Enables or disables IPv4 configuration
+            is_ipv6 (bool): Enables or disables IPv6 configuration
+            ipv4_assignment (str): Select IP Assignment type from the available options: Static, PPPoE or DHCP.
+            ip_address (str, optional): IP address to assign to the sub-interface.
+            netmask (str, optional): Subnet mask to assign to the sub-interface.
+            -- WAN --
+            gateway_name (str, optional): Name of the Gateway if the zone is WAN
+            gateway_address (str, optional): IP address of the Gateway if the zone is WAN
+            -- PPPoE --
+            username (str, optional): Username for the PPPoE connection if PPPoE
+            password (str, optional): Password for the PPPoE connection if PPPoE
+            service_name (str, optional): Service name for the PPPoE connection if PPPoE
+            service_name2 (str, optional): Service name for the PPPoE connection if PPPoE
+            TODO: add the rest
+        """
+        vlan_params["interface"] = interface
+        vlan_params["zone"] = zone
+        vlan_params["vlan_id"] = vlan_id
+        vlan_params["name"] = name
+        vlan_params["ipv4_assignment"] = ipv4_assignment
+
+        resp = self.client.submit_template(
+            "createvlan.j2", template_vars=vlan_params, debug=debug
+        )
+
+        return resp
+
 
 class Zone:
     """Class for working with Zone(s)."""
