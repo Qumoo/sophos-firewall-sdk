@@ -81,7 +81,7 @@ class Vlan:
         vlan_params["zone"] = zone
         vlan_params["vlan_id"] = vlan_id
         vlan_params["name"] = name
-        vlan_params["ipv4_assignment"] = ipv4_assignment
+        vlan_params["is_ipv4"] = is_ipv4
 
         resp = self.client.submit_template(
             "createvlan.j2", template_vars=vlan_params, debug=debug
